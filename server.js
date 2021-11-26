@@ -10,23 +10,25 @@ const authRoute = require("./routes/auth")
 
 const app = express()
 
-mongoose.connect(process.env.MONGO_URI_DATABASE,{
-    useNewUrlParser:true,
+mongoose.connect(process.env.MONGO_URI_DATABASE, {
+    useNewUrlParser: true,
 })
-.then(()=>console.log("DB CONNECTED"))
-.catch(err=>console.log("DB CONN ERR:", err));
+    .then(() => console.log("DB CONNECTED"))
+    .catch(err => console.log("DB CONN ERR:", err));
 
 //middlewares
 app.use(morgan('dev'))
-app.use(express.json({limit:'2mb'}));
+app.use(express.json({ limit: '2mb' }));
 app.use(cors())
 
-fs.readdirSync("./routes").map((r)=>{
-    app.use("/api",require("./routes/" + r))
+fs.readdirSync("./routes").map((r) => {
+    app.use("/api", require("./routes/" + r))
 })
 
 const port = process.env.PORT || 8000
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 })
+
+
