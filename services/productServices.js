@@ -9,4 +9,13 @@ module.exports = class ProductService{
             console.error('Could not fetch  products', err)
         }
     }
+
+    static async getProductDetailsById(id){
+        try{
+            const product = await Product.findById(id)
+            return product
+        }catch (err){
+            console.error('Could not fetch product details', err)
+        }
+    }
 }
