@@ -18,4 +18,19 @@ module.exports = class ProductService{
             console.error('Could not fetch product details', err)
         }
     }
+
+    static async insertProducts(data){
+        try{
+            await Product.bulkWrite(data.map(x=>({
+                updateOne: {
+                    filter: {code: x.code},
+                    update: x,
+                    upsert: true,
+                }
+            })))
+        } catch(err){
+            console.log(err)
+            throw(err)
+        }
+    }
 }
