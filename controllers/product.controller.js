@@ -53,9 +53,9 @@ module.exports = class Product {
                     .on('end', async () => {
                         console.log(filerows, "xxxfilerow")
                         const result = await ProductService.insertProducts(filerows)
+                        fs.unlinkSync(req.file.path);
                     })
             );
-            fs.unlinkSync(req.file.path);
         } catch (err) {
             res.status(500).json({ error: err })
             console.log(err)
