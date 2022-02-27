@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const invoiceSchema = new mongoose.Schema({
-    customer_id:String,
+    customer_id:{ type : mongoose.Schema.Types.ObjectId, ref: 'Contact'},
     stock_pick_id: String,
     cart:[{
         product_id:String,

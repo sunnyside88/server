@@ -11,6 +11,18 @@ module.exports = class Contact {
     }
   }
 
+  static async apiGetInvoiceDetails(req, res, next) {
+    try {
+      const invoices = await invoiceService.getInvoiceDetailsById(req.params.id);
+      if (!invoices) {
+        res.status(404).json("No invoices found in the database")
+      }
+      res.json(invoices)
+    } catch (err) {
+      res.status(500).json({ error: err })
+    }
+  }
+
   static async apiGetAllInvoices(req, res, next) {
     try {
       const invoices = await invoiceService.getAllInvoices()
