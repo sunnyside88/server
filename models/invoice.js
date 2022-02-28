@@ -5,6 +5,8 @@ const invoiceSchema = new mongoose.Schema({
     stock_pick_id: String,
     cart:[{
         product_id:String,
+        product_name:String,
+        product_code:String,
         qty:Number,
         price:Number,
         uom:String,
@@ -12,6 +14,7 @@ const invoiceSchema = new mongoose.Schema({
     }],
     cart_total:Number,
     status:String,
+    createdBy:String,
 }, { timestamps: true }
 );
 
