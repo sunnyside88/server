@@ -37,7 +37,6 @@ module.exports = class ProductService {
 
     static async deleteOne(id) {
         try {
-            console.log("xxxid", id)
             await Product.findByIdAndDelete(id)
         } catch (err) {
             console.log(err)
