@@ -5,7 +5,7 @@ module.exports = class Gr {
     try {
       const gr = await grService.getAllGr();
       if (!gr) {
-        res.status(404).json("No products found in the database");
+        res.status(404).json("No gr found in the database");
       }
       res.json(gr);
     } catch (err) {
