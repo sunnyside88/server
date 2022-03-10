@@ -6,6 +6,7 @@ const productSchema = new mongoose.Schema(
     code: { type: String, unique: true, required: true, dropDups: true },
     price: Number,
     uom: String,
+    stock_qty:Number,
   },
   { timestamps: true }
 );

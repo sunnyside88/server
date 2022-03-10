@@ -36,6 +36,16 @@ module.exports = class Product {
         }
     }
 
+    static async apiUpdateProduct(req, res, next) {
+        console.log(req.params.id,"xxxreq")
+        try {
+            await ProductService.updateProduct(req.params.id,req.body.data)
+            res.status(200).json("OK")
+        } catch (err) {
+            res.status(500).json({ error: err })
+        }
+    }
+
     static async apiUploadProduct(req, res, next) {
         try {
             let stream = fs.createReadStream(req.file.path);
