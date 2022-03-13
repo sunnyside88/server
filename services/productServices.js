@@ -1,4 +1,4 @@
-const { mongoose } = require("mongoose");
+const  mongoose  = require("mongoose");
 const Product = require("../models/product");
 
 module.exports = class ProductService {
@@ -8,6 +8,25 @@ module.exports = class ProductService {
       return allProducts;
     } catch (err) {
       console.error("Could not fetch  products", err);
+    }
+  }
+
+  static async upsertProduct(data) {
+    try {
+      let updateData = JSON.parse(JSON.stringify(data));
+      delete updateData._id;
+      let query = { _id: data._id };
+      if (!query._id) {
+        query._id = new mongoose.mongo.ObjectId();
+      }
+      await Product.findOneAndUpdate(query, updateData, {
+        upsert: true,
+        new: true,
+        setDefaultsOnInsert: true,
+      });
+    } catch (err) {
+      console.log(err);
+      throw err;
     }
   }
 

@@ -12,4 +12,6 @@ router.get("/products/:id", ProductCtrl.apiGetProductDetails)
 router.post("/products/upload", upload.single('file'), ProductCtrl.apiUploadProduct)
 router.post("/products/deleteOne", ProductCtrl.apiDeleteProduct)
 router.post("/products/update/:id", ProductCtrl.apiUpdateProduct)
+router.post("/products/upsertOne", ProductCtrl.apiCreateProduct)
+
 module.exports = router

@@ -22,4 +22,16 @@ module.exports = class Gi {
       console.log(err);
     }
   }
+
+  static async apiFilterPopularItem(req, res, next) {
+    try {
+      const gi = await giService.filterPopularItem();
+      if (!gi) {
+        res.status(404).json("No gi found in the database");
+      }
+      res.json(gi);
+    } catch (err) {
+      res.status(500).json({ error: err });
+    }
+  }
 };
