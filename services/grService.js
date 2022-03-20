@@ -18,4 +18,14 @@ module.exports = class GrService {
       console.error("Could not fetch gr", err);
     }
   }
+
+  static async getGrDetailsById(id) {
+    try {
+      const gr = await Gr.findById(id)
+      return gr
+    } catch (err) {
+      console.error('Could not fetch Gr details', err)
+    }
+  }
+
 };

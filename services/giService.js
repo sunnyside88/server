@@ -19,6 +19,15 @@ module.exports = class GiService {
     }
   }
 
+  static async getGiDetailsById(id) {
+    try {
+      const gi = await Gi.findById(id)
+      return gi
+    } catch (err) {
+      console.error('Could not fetch Gi details', err)
+    }
+  }
+
   static async filterPopularItem() {
     try {
       const allGi = await Gi.aggregate([

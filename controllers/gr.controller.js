@@ -22,4 +22,16 @@ module.exports = class Gr {
       console.log(err);
     }
   }
+  static async apiGetGrDetails(req, res, next) {
+    try {
+      const gr = await grService.getGrDetailsById(req.params.id);
+      if (!gr) {
+        res.status(404).json("No invoices found in the database")
+      }
+      res.json(gr)
+    } catch (err) {
+      res.status(500).json({ error: err })
+    }
+  }
+
 };
