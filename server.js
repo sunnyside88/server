@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require("fs");
+const process = require('process');
 require("dotenv").config();
 
 const authRoute = require("./routes/auth");
@@ -25,6 +26,10 @@ app.use(cors());
 fs.readdirSync("./routes").map((r) => {
   app.use("/api", require("./routes/" + r));
 });
+
+app.get('/', function (req, res) {
+  res.sendFile("/index.html")
+})
 
 const port = process.env.PORT || 8000;
 
