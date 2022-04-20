@@ -1,13 +1,21 @@
-const admin = require('../firebase')
+//const admin = require('../firebase')
+var admin = require("firebase-admin");
+
+var serviceAccount = require("../config/serviceKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
 
 exports.authCheck = async (req, res, next) => {
     try {
-        const firebaseUser = admin.auth().verifyIdToken(req.headers.userToken)
+        console.log(req.headers)
+        const firebaseUser = await admin.auth().verifyIdToken(req.headers.usertoken)
         req.user = firebaseUser
-        next()
+        return next()
     } catch (err) {
         res.status(401).json({
-            err: "Invalid or expired token"
+            err: "You are not authorized or expired token"
         })
     }
 };

@@ -47,7 +47,6 @@ module.exports = class Product {
   }
 
   static async apiUpdateProduct(req, res, next) {
-    console.log(req.params.id, "xxxreq");
     try {
       await ProductService.updateProduct(req.params.id, req.body.data);
       res.status(200).json("OK");
@@ -60,7 +59,6 @@ module.exports = class Product {
     try {
       let stream = fs.createReadStream(req.file.path);
       let filerows = [];
-      console.log(req.file, "xxxstream");
       stream.pipe(
         csv
           .parse({ headers: true, ignoreEmpty: true })
@@ -71,7 +69,6 @@ module.exports = class Product {
             res.status(500).json({ message: "Failed to upload" });
           })
           .on("end", async () => {
-            console.log(filerows, "xxxfilerow");
             const result = await ProductService.insertProducts(filerows);
             fs.unlinkSync(req.file.path);
           })

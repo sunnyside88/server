@@ -8,6 +8,7 @@ const process = require("process");
 require("dotenv").config();
 
 const authRoute = require("./routes/auth");
+const { authCheck } = require("./middlewares/auth");
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(express.json({ limit: "2mb" }));
 app.use(cors());
 
 fs.readdirSync("./routes").map((r) => {
-  app.use("/api", require("./routes/" + r));
+  app.use("/api", authCheck, require("./routes/" + r));
 });
 
 app.get("/", function (req, res) {
