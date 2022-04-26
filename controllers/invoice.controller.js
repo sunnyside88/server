@@ -35,4 +35,14 @@ module.exports = class Invoice {
       res.status(500).json({ error: err })
     }
   }
+
+  static async apiUpdateInvoice(req, res, next) {
+    try {
+      await invoiceService.updateInvoice(req.body.data);
+      res.status(200).json("OK");
+    } catch (err) {
+      res.status(500).json({ error: err });
+    }
+  }
+
 };

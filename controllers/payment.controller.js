@@ -3,23 +3,32 @@ const PaymentService = require("../services/paymentService");
 module.exports = class Payment {
   static async apiCreatePayment(req, res, next) {
     try {
-      await PaymentService.insertOnePayment(req.body.data)
+      await PaymentService.insertOnePayment(req.body.data);
       res.status(200).json({ isCreated: true });
     } catch (err) {
-      res.status(500).json({ error: err })
-      console.log(err)
+      res.status(500).json({ error: err });
+      console.log(err);
     }
   }
 
   static async apiGetAllPayments(req, res, next) {
     try {
-      const payments = await PaymentService.getAllPayments()
+      const payments = await PaymentService.getAllPayments();
       if (!payments) {
-        res.status(404).json("No invoices found in the database")
+        res.status(404).json("No invoices found in the database");
       }
-      res.json(payments)
+      res.json(payments);
     } catch (err) {
-      res.status(500).json({ error: err })
+      res.status(500).json({ error: err });
+    }
+  }
+
+  static async apiUpdatePayment(req, res, next) {
+    try {
+      await PaymentService.updatePayment(req.body.data);
+      res.status(200).json("OK");
+    } catch (err) {
+      res.status(500).json({ error: err });
     }
   }
 };
