@@ -1,2 +1,2 @@
-MONGO_URI_DATABASE= mongodb+srv://sansan:FeazorU7vfPFAgtN@cluster0.a7l4g.mongodb.net/fyp?retryWrites=true&w=majority
+MONGO_URI_DATABASE= mongodb+srv://sansan:xxxxx@cluster0.a7l4g.mongodb.net/fyp?retryWrites=true&w=majority
 PORT = 8000
